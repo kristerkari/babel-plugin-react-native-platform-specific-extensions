@@ -1,0 +1,60 @@
+{
+  "name": "babel-plugin-react-native-platform-specific-extensions",
+  "version": "1.0.0",
+  "description":
+    "Allow react-native platform specific extensions to be used for other file types than Javascript.",
+  "keywords": ["babel", "babel-plugin"],
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "author": "Krister Kari",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url":
+      "https://github.com/kristerkari/babel-plugin-react-native-platform-specific-extensions"
+  },
+  "files": ["index.js", "README.md"],
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.0.4",
+    "babel-plugin-tester": "^5.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "jest": "^22.0.4",
+    "jest-cli": "^22.0.4",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.9.2"
+  },
+  "dependencies": {
+    "@babel/template": "^7.0.0-beta.37"
+  },
+  "lint-staged": {
+    "*.js": ["prettier --write", "git add"]
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "env": {
+      "jest": true
+    },
+    "rules": {
+      "space-before-function-paren": [2, "never"],
+      "semi": [2, "always"],
+      "quotes": 0,
+      "no-unused-vars": 2
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "none"
+  }
+}
