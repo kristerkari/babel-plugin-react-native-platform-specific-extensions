@@ -1,6 +1,15 @@
 # babel-plugin-react-native-platform-specific-extensions
 
-Allow react-native platform specific extensions to be used for other file types than Javascript.
+Allow [react-native platform specific extensions](https://facebook.github.io/react-native/docs/platform-specific-code.html#platform-specific-extensions) to be used for other file types than Javascript.
+
+Example:
+
+`import styles from "./styles.css";`
+
+* `styles.android.css` <- Android only
+* `styles.ios.css` <- iOS only
+* `styles.native.css` <- Both Android and iOS
+* `styles.css` <- Default. Android, iOS and Web
 
 ## Usage
 
