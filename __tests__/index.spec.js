@@ -1,14 +1,21 @@
 import pluginTester from "babel-plugin-tester";
 import platformSpecific from "../index";
 import fs from "fs";
+import nodePath from "path";
 
 let spy;
+let dirnameSpy;
+
+const styleFileName = nodePath.join(__dirname, "styles.scss");
 
 pluginTester({
   plugin: platformSpecific,
   pluginName: "babel-plugin-react-native-platform-specific-extensions",
   pluginOptions: {
     extensions: ["scss"]
+  },
+  babelOptions: {
+    filename: styleFileName
   },
   snapshot: true,
   tests: [
@@ -109,6 +116,56 @@ pluginTester({
     {
       title: "Should not touch import if the files do not exist",
       code: `import styles from "./styles.scss"`
+    },
+    {
+      title:
+        "Should transform import if path.dirname returns the same folder than fs.existsSync",
+      code: `import styles from "./styles.scss"`,
+      setup() {
+        dirnameSpy = jest
+          .spyOn(nodePath, "dirname")
+          .mockImplementation(path => {
+            return path.replace(
+              styleFileName,
+              nodePath.join(__dirname, "src/foo")
+            );
+          });
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return (
+            /src\/foo\/styles\.ios\.scss/.test(path) ||
+            /src\/foo\/styles\.android\.scss/.test(path)
+          );
+        });
+      },
+      teardown() {
+        dirnameSpy.mockRestore();
+        spy.mockRestore();
+      }
+    },
+    {
+      title:
+        "Should not touch import if path.dirname returns a different folder than fs.existsSync",
+      code: `import styles from "./styles.scss"`,
+      setup() {
+        dirnameSpy = jest
+          .spyOn(nodePath, "dirname")
+          .mockImplementation(path => {
+            return path.replace(
+              styleFileName,
+              nodePath.join(__dirname, "src/foo")
+            );
+          });
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return (
+            /src\/bar\/styles\.ios\.scss/.test(path) ||
+            /src\/bar\/styles\.android\.scss/.test(path)
+          );
+        });
+      },
+      teardown() {
+        dirnameSpy.mockRestore();
+        spy.mockRestore();
+      }
     },
     {
       title: "Should not do anything with a global import (to be implemented)",

@@ -3,8 +3,6 @@ var nodePath = require("path");
 var babelTemplate = require("@babel/template").default;
 
 module.exports = function(babel) {
-  var t = babel.types;
-
   return {
     visitor: {
       ImportDeclaration: function importResolver(path, state) {
@@ -39,9 +37,17 @@ module.exports = function(babel) {
         var iosFileName = fileName.replace(ext, `.ios${ext}`);
         var androidFileName = fileName.replace(ext, `.android${ext}`);
         var nativeFileName = fileName.replace(ext, `.native${ext}`);
-        var iosFileExists = fs.existsSync(iosFileName);
-        var androidFileExists = fs.existsSync(androidFileName);
-        var nativeFileExists = fs.existsSync(nativeFileName);
+        var transformedFileName = state.file.opts.filename;
+        var currentDir = nodePath.dirname(transformedFileName);
+        var iosFileExists = fs.existsSync(
+          nodePath.resolve(currentDir, iosFileName)
+        );
+        var androidFileExists = fs.existsSync(
+          nodePath.resolve(currentDir, androidFileName)
+        );
+        var nativeFileExists = fs.existsSync(
+          nodePath.resolve(currentDir, nativeFileName)
+        );
         var ast = null;
 
         if (iosFileExists && androidFileExists) {
