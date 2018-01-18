@@ -30,6 +30,16 @@ import styles from \\"./styles.scss\\";
 "
 `;
 
+exports[`babel-plugin-react-native-platform-specific-extensions Should not touch import if path.dirname returns a different folder than fs.existsSync: Should not touch import if path.dirname returns a different folder than fs.existsSync 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styles from \\"./styles.scss\\";
+"
+`;
+
 exports[`babel-plugin-react-native-platform-specific-extensions Should not touch import if the files do not exist: Should not touch import if the files do not exist 1`] = `
 "
 import styles from \\"./styles.scss\\"
@@ -113,6 +123,17 @@ import styles from \\"./styles.scss\\"
       ↓ ↓ ↓ ↓ ↓ ↓
 
 import styles from \\"./styles.native.scss\\";
+"
+`;
+
+exports[`babel-plugin-react-native-platform-specific-extensions Should transform import if path.dirname returns the same folder than fs.existsSync: Should transform import if path.dirname returns the same folder than fs.existsSync 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.android.scss\\");
 "
 `;
 
