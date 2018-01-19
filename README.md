@@ -1,5 +1,7 @@
 # babel-plugin-react-native-platform-specific-extensions
 
+[![Build Status](https://travis-ci.org/kristerkari/babel-plugin-react-native-platform-specific-extensions.svg?branch=master)](https://travis-ci.org/kristerkari/babel-plugin-react-native-platform-specific-extensions)[![Build status](https://ci.appveyor.com/api/projects/status/2i1rkjptvp11fsq4/branch/master?svg=true)](https://ci.appveyor.com/project/kristerkari/babel-plugin-react-native-platform-specific-extens/branch/master)
+
 Allow [react-native platform specific extensions](https://facebook.github.io/react-native/docs/platform-specific-code.html#platform-specific-extensions) to be used for other file types than Javascript.
 
 Example:
