@@ -1,5 +1,7 @@
 # babel-plugin-react-native-platform-specific-extensions
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kristerkari/babel-plugin-react-native-platform-specific-extensions.svg)](https://greenkeeper.io/)
+
 [![NPM version](http://img.shields.io/npm/v/babel-plugin-react-native-platform-specific-extensions.svg)](https://www.npmjs.org/package/babel-plugin-react-native-platform-specific-extensions)
 [![Build Status](https://travis-ci.org/kristerkari/babel-plugin-react-native-platform-specific-extensions.svg?branch=master)](https://travis-ci.org/kristerkari/babel-plugin-react-native-platform-specific-extensions)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
