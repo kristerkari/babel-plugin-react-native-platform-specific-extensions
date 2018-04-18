@@ -168,13 +168,84 @@ pluginTester({
       }
     },
     {
-      title: "Should not do anything with a global import (to be implemented)",
-      code: `import "./styles.scss"`,
+      title:
+        "Should require ios and android files if they exits (side-effects-only import case)",
+      code: `import styles from "./styles.scss"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return (
             /styles\.ios\.scss/.test(path) || /styles\.android\.scss/.test(path)
           );
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
+      title:
+        "Should require ios and native files if they exits (side-effects-only import case)",
+      code: `import styles from "./styles.scss"`,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return (
+            /styles\.ios\.scss/.test(path) || /styles\.native\.scss/.test(path)
+          );
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
+      title:
+        "Should require android and native files if they exits (side-effects-only import case)",
+      code: `import styles from "./styles.scss"`,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return (
+            /styles\.android\.scss/.test(path) ||
+            /styles\.native\.scss/.test(path)
+          );
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
+      title:
+        "Should require ios and non prefixed file (side-effects-only import case)",
+      code: `import styles from "./styles.scss"`,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return /styles\.ios\.scss/.test(path);
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
+      title:
+        "Should require android and non prefixed file (side-effects-only import case)",
+      code: `import styles from "./styles.scss"`,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return /styles\.android\.scss/.test(path);
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
+      title:
+        "Should require native file if it exists (side-effects-only import case)",
+      code: `import styles from "./styles.scss"`,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return /styles\.native\.scss/.test(path);
         });
       },
       teardown() {
@@ -238,13 +309,30 @@ pluginTester({
       }
     },
     {
-      title: "Should not do anything with a global import (to be implemented)",
-      code: `import "./something.txt"`,
+      title:
+        "Should work with other extension types (.txt) (side-effects-only import case)",
+      code: `import txt from "./something.txt"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return (
             /something\.ios\.txt/.test(path) ||
             /something\.android\.txt/.test(path)
+          );
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
+      title:
+        "Should work with other extension types (.json) (side-effects-only import case)",
+      code: `import json from "./something.json"`,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return (
+            /something\.ios\.json/.test(path) ||
+            /something\.android\.json/.test(path)
           );
         });
       },

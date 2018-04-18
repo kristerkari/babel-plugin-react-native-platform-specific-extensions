@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`babel-plugin-react-native-platform-specific-extensions Should not do anything with a global import (to be implemented): Should not do anything with a global import (to be implemented) 1`] = `
-"
-import \\"./styles.scss\\"
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-import \\"./styles.scss\\";
-"
-`;
-
-exports[`babel-plugin-react-native-platform-specific-extensions Should not do anything with a global import (to be implemented): Should not do anything with a global import (to be implemented) 2`] = `
-"
-import \\"./something.txt\\"
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-import \\"./something.txt\\";
-"
-`;
-
 exports[`babel-plugin-react-native-platform-specific-extensions Should not react to file types that are not defined in plugin options (.scss): Should not react to file types that are not defined in plugin options (.scss) 1`] = `
 "
 import styles from \\"./styles.scss\\"
@@ -61,6 +41,17 @@ var myStyles = Platform.OS === \\"ios\\" ? require(\\"./myStylesFile.ios.scss\\"
 "
 `;
 
+exports[`babel-plugin-react-native-platform-specific-extensions Should require android and native files if they exits (side-effects-only import case): Should require android and native files if they exits (side-effects-only import case) 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"android\\" ? require(\\"./styles.android.scss\\") : require(\\"./styles.native.scss\\");
+"
+`;
+
 exports[`babel-plugin-react-native-platform-specific-extensions Should require android and native files if they exits: Should require android and native files if they exits 1`] = `
 "
 import styles from \\"./styles.scss\\"
@@ -69,6 +60,17 @@ import styles from \\"./styles.scss\\"
 
 import { Platform } from \\"react-native\\";
 var styles = Platform.OS === \\"android\\" ? require(\\"./styles.android.scss\\") : require(\\"./styles.native.scss\\");
+"
+`;
+
+exports[`babel-plugin-react-native-platform-specific-extensions Should require android and non prefixed file (side-effects-only import case): Should require android and non prefixed file (side-effects-only import case) 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"android\\" ? require(\\"./styles.android.scss\\") : require(\\"./styles.scss\\");
 "
 `;
 
@@ -83,6 +85,17 @@ var styles = Platform.OS === \\"android\\" ? require(\\"./styles.android.scss\\"
 "
 `;
 
+exports[`babel-plugin-react-native-platform-specific-extensions Should require ios and android files if they exits (side-effects-only import case): Should require ios and android files if they exits (side-effects-only import case) 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.android.scss\\");
+"
+`;
+
 exports[`babel-plugin-react-native-platform-specific-extensions Should require ios and android files if they exits: Should require ios and android files if they exits 1`] = `
 "
 import styles from \\"./styles.scss\\"
@@ -91,6 +104,17 @@ import styles from \\"./styles.scss\\"
 
 import { Platform } from \\"react-native\\";
 var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.android.scss\\");
+"
+`;
+
+exports[`babel-plugin-react-native-platform-specific-extensions Should require ios and native files if they exits (side-effects-only import case): Should require ios and native files if they exits (side-effects-only import case) 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.native.scss\\");
 "
 `;
 
@@ -105,6 +129,17 @@ var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : requ
 "
 `;
 
+exports[`babel-plugin-react-native-platform-specific-extensions Should require ios and non prefixed file (side-effects-only import case): Should require ios and non prefixed file (side-effects-only import case) 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.scss\\");
+"
+`;
+
 exports[`babel-plugin-react-native-platform-specific-extensions Should require ios and non prefixed file: Should require ios and non prefixed file 1`] = `
 "
 import styles from \\"./styles.scss\\"
@@ -113,6 +148,16 @@ import styles from \\"./styles.scss\\"
 
 import { Platform } from \\"react-native\\";
 var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.scss\\");
+"
+`;
+
+exports[`babel-plugin-react-native-platform-specific-extensions Should require native file if it exists (side-effects-only import case): Should require native file if it exists (side-effects-only import case) 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styles from \\"./styles.native.scss\\";
 "
 `;
 
@@ -137,6 +182,17 @@ var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : requ
 "
 `;
 
+exports[`babel-plugin-react-native-platform-specific-extensions Should work with other extension types (.json) (side-effects-only import case): Should work with other extension types (.json) (side-effects-only import case) 1`] = `
+"
+import json from \\"./something.json\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var json = Platform.OS === \\"ios\\" ? require(\\"./something.ios.json\\") : require(\\"./something.android.json\\");
+"
+`;
+
 exports[`babel-plugin-react-native-platform-specific-extensions Should work with other extension types (.json): Should work with other extension types (.json) 1`] = `
 "
 import json from \\"./something.json\\"
@@ -145,6 +201,17 @@ import json from \\"./something.json\\"
 
 import { Platform } from \\"react-native\\";
 var json = Platform.OS === \\"ios\\" ? require(\\"./something.ios.json\\") : require(\\"./something.android.json\\");
+"
+`;
+
+exports[`babel-plugin-react-native-platform-specific-extensions Should work with other extension types (.txt) (side-effects-only import case): Should work with other extension types (.txt) (side-effects-only import case) 1`] = `
+"
+import txt from \\"./something.txt\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var txt = Platform.OS === \\"ios\\" ? require(\\"./something.ios.txt\\") : require(\\"./something.android.txt\\");
 "
 `;
 
