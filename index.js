@@ -29,11 +29,6 @@ module.exports = function(babel) {
 
         var specifier = node.specifiers[0];
 
-        if (!specifier) {
-          return;
-        }
-
-        var name = specifier.local.name;
         var iosFileName = fileName.replace(ext, `.ios${ext}`);
         var androidFileName = fileName.replace(ext, `.android${ext}`);
         var nativeFileName = fileName.replace(ext, `.native${ext}`);
@@ -50,39 +45,35 @@ module.exports = function(babel) {
         );
         var ast = null;
 
+        function astTernary(platform, valueTrue, valueFalse) {
+          // Omit the var assignment when specifier is empty (global import case, executing for the side-effects only).
+          const assignee = specifier ? `var ${specifier.local.name} = ` : "";
+
+          return babelTemplate.ast(
+            `import { Platform } from "react-native";` +
+              assignee +
+              `Platform.OS === "${platform}" ? require("${valueTrue}") : require("${valueFalse}");`
+          );
+        }
+
         if (iosFileExists && androidFileExists) {
-          ast = babelTemplate.ast(`
-              import { Platform } from "react-native";
-              var ${name} = Platform.OS === "ios" ? require("${iosFileName}") : require("${androidFileName}");
-            `);
+          ast = astTernary("ios", iosFileName, androidFileName);
           path.replaceWithMultiple(ast);
           return;
         } else if (iosFileExists && !androidFileExists && nativeFileExists) {
-          ast = babelTemplate.ast(`
-              import { Platform } from "react-native";
-              var ${name} = Platform.OS === "ios" ? require("${iosFileName}") : require("${nativeFileName}");
-            `);
+          ast = astTernary("ios", iosFileName, nativeFileName);
           path.replaceWithMultiple(ast);
           return;
         } else if (!iosFileExists && androidFileExists && nativeFileExists) {
-          ast = babelTemplate.ast(`
-              import { Platform } from "react-native";
-              var ${name} = Platform.OS === "android" ? require("${androidFileName}") : require("${nativeFileName}");
-            `);
+          ast = astTernary("android", androidFileName, nativeFileName);
           path.replaceWithMultiple(ast);
           return;
         } else if (iosFileExists && !androidFileExists && !nativeFileExists) {
-          ast = babelTemplate.ast(`
-              import { Platform } from "react-native";
-              var ${name} = Platform.OS === "ios" ? require("${iosFileName}") : require("${fileName}");
-            `);
+          ast = astTernary("ios", iosFileName, fileName);
           path.replaceWithMultiple(ast);
           return;
         } else if (!iosFileExists && androidFileExists && !nativeFileExists) {
-          ast = babelTemplate.ast(`
-              import { Platform } from "react-native";
-              var ${name} = Platform.OS === "android" ? require("${androidFileName}") : require("${fileName}");
-            `);
+          ast = astTernary("android", androidFileName, fileName);
           path.replaceWithMultiple(ast);
           return;
         }
