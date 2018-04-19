@@ -1,3 +1,7 @@
+# v1.1.0
+
+* Added: support for imports with side effects.
+
 # v1.0.1
 
 * Fix a bug where files were not checked relative to the transformed file.
