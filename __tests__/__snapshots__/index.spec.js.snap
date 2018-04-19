@@ -171,6 +171,16 @@ import styles from \\"./styles.native.scss\\";
 "
 `;
 
+exports[`babel-plugin-react-native-platform-specific-extensions Should throw if no extensions defined in options: Should throw if no extensions defined in options 1`] = `
+"
+import styles from \\"./styles.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+Error: unknown: You have not specified any extensions in the plugin options.
+"
+`;
+
 exports[`babel-plugin-react-native-platform-specific-extensions Should transform import if path.dirname returns the same folder than fs.existsSync: Should transform import if path.dirname returns the same folder than fs.existsSync 1`] = `
 "
 import styles from \\"./styles.scss\\"

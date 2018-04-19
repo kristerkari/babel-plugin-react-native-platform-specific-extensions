@@ -342,3 +342,19 @@ pluginTester({
     }
   ]
 });
+
+pluginTester({
+  plugin: platformSpecific,
+  pluginName: "babel-plugin-react-native-platform-specific-extensions",
+  pluginOptions: {},
+  snapshot: true,
+  tests: [
+    {
+      title: "Should throw if no extensions defined in options",
+      code: `import styles from "./styles.scss"`,
+      error: "You have not specified any extensions in the plugin options.",
+      setup() {},
+      teardown() {}
+    }
+  ]
+});
