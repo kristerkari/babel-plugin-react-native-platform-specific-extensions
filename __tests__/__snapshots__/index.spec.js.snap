@@ -87,12 +87,12 @@ var styles = Platform.OS === \\"android\\" ? require(\\"./styles.android.scss\\"
 
 exports[`babel-plugin-react-native-platform-specific-extensions Should require ios and android files if they exits (side-effects-only import case): Should require ios and android files if they exits (side-effects-only import case) 1`] = `
 "
-import styles from \\"./styles.scss\\"
+import \\"./styles.scss\\"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 import { Platform } from \\"react-native\\";
-var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.android.scss\\");
+Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.android.scss\\");
 "
 `;
 

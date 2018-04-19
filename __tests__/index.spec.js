@@ -170,7 +170,7 @@ pluginTester({
     {
       title:
         "Should require ios and android files if they exits (side-effects-only import case)",
-      code: `import styles from "./styles.scss"`,
+      code: `import "./styles.scss"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return (
