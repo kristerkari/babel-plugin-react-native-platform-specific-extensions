@@ -185,7 +185,7 @@ pluginTester({
     {
       title:
         "Should require ios and native files if they exits (side-effects-only import case)",
-      code: `import styles from "./styles.scss"`,
+      code: `import "./styles.scss"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return (
@@ -200,7 +200,7 @@ pluginTester({
     {
       title:
         "Should require android and native files if they exits (side-effects-only import case)",
-      code: `import styles from "./styles.scss"`,
+      code: `import "./styles.scss"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return (
@@ -216,7 +216,7 @@ pluginTester({
     {
       title:
         "Should require ios and non prefixed file (side-effects-only import case)",
-      code: `import styles from "./styles.scss"`,
+      code: `import "./styles.scss"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return /styles\.ios\.scss/.test(path);
@@ -229,7 +229,7 @@ pluginTester({
     {
       title:
         "Should require android and non prefixed file (side-effects-only import case)",
-      code: `import styles from "./styles.scss"`,
+      code: `import "./styles.scss"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return /styles\.android\.scss/.test(path);
@@ -242,7 +242,7 @@ pluginTester({
     {
       title:
         "Should require native file if it exists (side-effects-only import case)",
-      code: `import styles from "./styles.scss"`,
+      code: `import "./styles.scss"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return /styles\.native\.scss/.test(path);
@@ -311,7 +311,7 @@ pluginTester({
     {
       title:
         "Should work with other extension types (.txt) (side-effects-only import case)",
-      code: `import txt from "./something.txt"`,
+      code: `import "./something.txt"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return (
@@ -327,7 +327,7 @@ pluginTester({
     {
       title:
         "Should work with other extension types (.json) (side-effects-only import case)",
-      code: `import json from "./something.json"`,
+      code: `import "./something.json"`,
       setup() {
         spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
           return (
