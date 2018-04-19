@@ -50,5 +50,4 @@ You must give one or more file extensions inside an array in the plugin options.
 
 ## TODO
 
-* Support imports with side effects, e.g. `import "./myfile.css";`.
 * Support `require`.
