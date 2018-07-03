@@ -34,6 +34,46 @@ pluginTester({
       }
     },
     {
+      title: "Should require correct files if they exist (two imports)",
+      code: `
+      import styles from "./styles.scss";
+      import other from "./other.scss"
+      `,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return (
+            /(styles|other)\.ios\.scss/.test(path) ||
+            /styles\.android\.scss/.test(path) ||
+            /other\.native\.scss/.test(path)
+          );
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
+      title: "Should require correct files if they exist (multiple imports)",
+      code: `
+      import styles from "./styles.scss";
+      import "./other.scss";
+      import "./foo.scss";
+      import something from "./somewhere.scss";
+      `,
+      setup() {
+        spy = jest.spyOn(fs, "existsSync").mockImplementation(path => {
+          return (
+            /(styles|other)\.ios\.scss/.test(path) ||
+            /(styles|somewhere)\.android\.scss/.test(path) ||
+            /other\.native\.scss/.test(path)
+          );
+        });
+      },
+      teardown() {
+        spy.mockRestore();
+      }
+    },
+    {
       title: "Should require ios and native files if they exits",
       code: `import styles from "./styles.scss"`,
       setup() {
