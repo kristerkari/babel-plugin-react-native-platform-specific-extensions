@@ -85,6 +85,37 @@ var styles = Platform.OS === \\"android\\" ? require(\\"./styles.android.scss\\"
 "
 `;
 
+exports[`babel-plugin-react-native-platform-specific-extensions Should require correct files if they exist (multiple imports): Should require correct files if they exist (multiple imports) 1`] = `
+"
+import styles from \\"./styles.scss\\";
+import \\"./other.scss\\";
+import \\"./foo.scss\\";
+import something from \\"./somewhere.scss\\";
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.android.scss\\");
+Platform.OS === \\"ios\\" ? require(\\"./other.ios.scss\\") : require(\\"./other.native.scss\\");
+
+import \\"./foo.scss\\";
+var something = Platform.OS === \\"android\\" ? require(\\"./somewhere.android.scss\\") : require(\\"./somewhere.scss\\");
+"
+`;
+
+exports[`babel-plugin-react-native-platform-specific-extensions Should require correct files if they exist (two imports): Should require correct files if they exist (two imports) 1`] = `
+"
+import styles from \\"./styles.scss\\";
+import other from \\"./other.scss\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { Platform } from \\"react-native\\";
+var styles = Platform.OS === \\"ios\\" ? require(\\"./styles.ios.scss\\") : require(\\"./styles.android.scss\\");
+var other = Platform.OS === \\"ios\\" ? require(\\"./other.ios.scss\\") : require(\\"./other.native.scss\\");
+"
+`;
+
 exports[`babel-plugin-react-native-platform-specific-extensions Should require ios and android files if they exits (side-effects-only import case): Should require ios and android files if they exits (side-effects-only import case) 1`] = `
 "
 import \\"./styles.scss\\"

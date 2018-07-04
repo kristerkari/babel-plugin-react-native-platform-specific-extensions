@@ -3,8 +3,12 @@ var nodePath = require("path");
 var babelTemplate = require("@babel/template").default;
 
 module.exports = function(babel) {
+  var isPlatformImportInserted = false;
   return {
     visitor: {
+      Program() {
+        isPlatformImportInserted = false;
+      },
       ImportDeclaration: function importResolver(path, state) {
         var extensions =
           state.opts != null &&
@@ -48,9 +52,15 @@ module.exports = function(babel) {
         function astTernary(platform, valueTrue, valueFalse) {
           // Omit the var assignment when specifier is empty (global import case, executing for the side-effects only).
           const assignee = specifier ? `var ${specifier.local.name} = ` : "";
+          const platformStr = `import { Platform } from "react-native";`;
+          const platformImport = !isPlatformImportInserted ? platformStr : "";
+
+          if (platformImport) {
+            isPlatformImportInserted = true;
+          }
 
           return babelTemplate.ast(
-            `import { Platform } from "react-native";` +
+            platformImport +
               assignee +
               `Platform.OS === "${platform}" ? require("${valueTrue}") : require("${valueFalse}");`
           );
