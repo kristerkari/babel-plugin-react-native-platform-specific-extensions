@@ -1,3 +1,5 @@
+/* eslint-disable @babel/development/plugin-name */
+
 import pluginTester from "babel-plugin-tester";
 import platformSpecific from "../index";
 import fs from "fs";

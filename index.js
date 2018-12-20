@@ -5,6 +5,7 @@ var babelTemplate = require("@babel/template").default;
 module.exports = function(babel) {
   var isPlatformImportInserted = false;
   return {
+    name: "react-native-platform-specific-extensions",
     visitor: {
       Program() {
         isPlatformImportInserted = false;
